@@ -14,11 +14,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-  // res.header(
-  //   "Access-Control-Allow-Origin",
-  //   "https://tu-mascota-tienda-git-main-serna7a-gmailcom.vercel.app"
-  // );
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173 https://habitos-eight.vercel.app");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -28,11 +24,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(router);
+const corsOptions = {
+  origin: 'https://habitos-eight.vercel.app'
+};
+app.use(cors(corsOptions));
+
 app.use("/", router);
 
 app.use((err, req, res, next) => {
-  // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
   console.error(err);
